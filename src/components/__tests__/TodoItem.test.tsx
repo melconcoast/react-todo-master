@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import TodoItem from '../TodoItem'
 import { Todo } from '../../types'
 import { DndContext } from '@dnd-kit/core'
