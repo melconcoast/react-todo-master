@@ -4,15 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:prod": "vite build --mode production",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "build:prod": "npx vite build --mode production",
     "typecheck": "npx --package=typescript tsc --noEmit",
     "lint": "echo 'ESLint configuration simplified for basic setup - TypeScript checking handled by Vite'",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "preview": "npx vite preview",
+    "test": "npx vitest",
+    "test:ui": "npx vitest --ui",
+    "test:coverage": "npx vitest --coverage"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
