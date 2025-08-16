@@ -10,8 +10,9 @@
 [build.environment]
   # Environment variables for build process
   NODE_VERSION = "22"
-  NODE_ENV = "production"
+  # Don't set NODE_ENV=production during build to ensure devDependencies are installed
   CI = "true"
+  NPM_FLAGS = "--include=dev"
 
 # Single Page Application (SPA) routing configuration
 [[redirects]]
