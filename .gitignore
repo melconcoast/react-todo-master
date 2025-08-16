@@ -85,3 +85,9 @@ temp/
 *.backup
 *.bak
 *.tmp
+
+# Debug files
+debug.html
+**/debug-*.html
+debug/
+**/debug/
