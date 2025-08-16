@@ -1,0 +1,69 @@
+# Netlify deployment configuration for React Todo App
+
+[build]
+  # Build command to run
+  command = "npm run build:prod"
+  
+  # Directory to publish (Vite outputs to 'dist' by default)
+  publish = "dist"
+  
+  # Node.js version to use during build
+  environment = { NODE_VERSION = "18" }
+
+[build.environment]
+  # Environment variables for build process
+  NODE_ENV = "production"
+  CI = "true"
+
+# Single Page Application (SPA) routing configuration
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers for enhanced protection
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking attacks
+    X-Frame-Options = "DENY"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Enable XSS protection
+    X-XSS-Protection = "1; mode=block"
+    
+    # Force HTTPS (only if using custom domain with SSL)
+    # Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy for added security
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+
+# Cache static assets for better performance
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache HTML files with shorter cache time
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Forms handling (if needed in future)
+# [[redirects]]
+#   from = "/api/*"
+#   to = "/.netlify/functions/:splat"
+#   status = 200
+
+# Branch deploy settings
+[context.production]
+  command = "npm run build:prod"
+
+[context.deploy-preview]
+  command = "npm run build"
+
+[context.branch-deploy]
+  command = "npm run build"
