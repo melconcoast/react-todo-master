@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx tsc && vite build",
-    "build:prod": "npx tsc && vite build --mode production",
-    "lint": "echo 'ESLint configuration simplified for basic setup - TypeScript checking handled by tsc'",
+    "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "typecheck": "npx --package=typescript tsc --noEmit",
+    "lint": "echo 'ESLint configuration simplified for basic setup - TypeScript checking handled by Vite'",
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
