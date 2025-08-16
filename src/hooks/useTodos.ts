@@ -1,5 +1,5 @@
 // Import React hooks and types
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Todo } from '../types';
 import { generateId } from '../utils';
 
@@ -21,34 +21,57 @@ const STORAGE_KEY = 'react-todo-app-todos';
 export function useTodos() {
   // Main todos state - array of Todo objects
   const [todos, setTodos] = useState<Todo[]>([]);
+  // Ref to track if initial load has completed
+  const isInitialized = useRef(false);
+  // Track if this is the first render
+  const isFirstRender = useRef(true);
 
   // Load todos from localStorage on mount
   useEffect(() => {
+    console.log('🔄 useTodos: Loading from localStorage...');
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
+      console.log('📦 useTodos: Raw stored data:', stored);
       if (stored) {
         const parsedTodos = JSON.parse(stored).map((todo: any) => ({
           ...todo,
           createdAt: new Date(todo.createdAt),
           dueDate: todo.dueDate ? new Date(todo.dueDate) : undefined
         }));
+        console.log('✅ useTodos: Parsed todos:', parsedTodos);
         setTodos(parsedTodos);
+      } else {
+        console.log('⚠️ useTodos: No stored data found');
       }
     } catch (error) {
-      console.error('Failed to load todos from localStorage:', error);
+      console.error('❌ useTodos: Failed to load todos from localStorage:', error);
     }
+    // Don't set isInitialized here - wait for the state update to complete
   }, []);
 
-  // Save todos to localStorage whenever todos change
+  // Save todos to localStorage whenever todos change (but not on initial load)
   useEffect(() => {
+    console.log('💾 useTodos: Save effect triggered. isFirstRender:', isFirstRender.current, 'isInitialized:', isInitialized.current, 'todos length:', todos.length);
+    
+    // Skip saving on the very first render (initial mount)
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      isInitialized.current = true;
+      console.log('🏁 useTodos: First render complete, initialization done');
+      return;
+    }
+    
+    // Now we can safely save on subsequent changes
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+      console.log('✅ useTodos: Successfully saved to localStorage:', todos);
     } catch (error) {
-      console.error('Failed to save todos to localStorage:', error);
+      console.error('❌ useTodos: Failed to save todos to localStorage:', error);
     }
   }, [todos]);
 
   const addTodo = (text: string, dueDate?: Date, category?: string) => {
+    console.log('➕ useTodos: Adding new todo:', { text, dueDate, category });
     const newTodo: Todo = {
       id: generateId(),
       text,
@@ -57,7 +80,12 @@ export function useTodos() {
       dueDate,
       category,
     };
-    setTodos(prev => [newTodo, ...prev]);
+    console.log('🆕 useTodos: Created todo object:', newTodo);
+    setTodos(prev => {
+      const newTodos = [newTodo, ...prev];
+      console.log('📝 useTodos: Setting new todos array:', newTodos);
+      return newTodos;
+    });
   };
 
   const toggleTodo = (id: string) => {
