@@ -9,7 +9,7 @@
 
 [build.environment]
   # Environment variables for build process
-  NODE_VERSION = "18"
+  NODE_VERSION = "22"
   NODE_ENV = "production"
   CI = "true"
 
