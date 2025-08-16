@@ -4,15 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "./node_modules/.bin/vite",
-    "build": "./node_modules/.bin/vite build",
-    "build:prod": "./node_modules/.bin/vite build --mode production",
-    "typecheck": "./node_modules/.bin/tsc --noEmit",
+    "dev": "vite",
+    "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "typecheck": "tsc --noEmit",
     "lint": "echo 'ESLint configuration simplified for basic setup - TypeScript checking handled by Vite'",
-    "preview": "./node_modules/.bin/vite preview",
-    "test": "./node_modules/.bin/vitest",
-    "test:ui": "./node_modules/.bin/vitest --ui",
-    "test:coverage": "./node_modules/.bin/vitest --coverage"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
