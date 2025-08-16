@@ -1,8 +1,8 @@
 # Netlify deployment configuration for React Todo App
 
 [build]
-  # Build command to run
-  command = "npm run build:prod"
+  # Build command to run - ensure dependencies are installed first
+  command = "npm ci && npm run build:prod"
   
   # Directory to publish (Vite outputs to 'dist' by default)
   publish = "dist"
@@ -58,10 +58,10 @@
 
 # Branch deploy settings
 [context.production]
-  command = "npm run build:prod"
+  command = "npm ci && npm run build:prod"
 
 [context.deploy-preview]
-  command = "npm run build"
+  command = "npm ci && npm run build"
 
 [context.branch-deploy]
-  command = "npm run build"
+  command = "npm ci && npm run build"
