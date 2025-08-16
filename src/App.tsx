@@ -274,7 +274,7 @@ function App() {
             <div className="glass-card rounded-2xl p-4 border border-white/30">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-600">
-                  Created by <span className="font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Krishnakant Vyas</span>
+                  Created by <span className="font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Krishna Vyas</span>
                 </p>
                 <p className="text-xs text-gray-500">
                   © {new Date().getFullYear()} All rights reserved.
