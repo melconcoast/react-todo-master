@@ -31,6 +31,6 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom', 'lucide-react'],
   },
-  // Base URL for deployment (can be overridden by environment)
-  base: '/',
+  // Base URL for deployment - set to repo name for GitHub Pages
+  base: process.env.NODE_ENV === 'production' ? '/react-todo-master/' : '/',
 })
